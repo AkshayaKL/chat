@@ -1,0 +1,31 @@
+var app=require('express')();
+var http=require('http').Server(app);
+ 
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "123",
+  database: "myDB"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("SELECT name,dept FROM users", function (err, result, fields) {
+    if (err) throw err;
+   console.log(result);
+   app.get('/',function(req,res)
+   	{    
+   		res.write(result[40].name);
+   		res.write(result[40].dept);
+   		
+
+   	res.end()
+   });
+   http.listen(8080,function()
+   {
+   	
+   });
+  });
+});

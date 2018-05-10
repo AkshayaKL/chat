@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" ref="style.css">
+<style>
+body
+{
+
+    background-color:black;
+    padding: 70px 0;
+    border: 3px solid green;
+    text-align: center;
+    font-color:purple;
+    color:white;
+    height:1000px;
+    padding-bottom: 50px;
+
+
+}
+textarea
+{
+	border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+}
+
+}
+li
+{
+	background-image:url('https://lh5.googleusercontent.com/jzz0Z9hHNCdSQBtxh7lJpFh_ak1wLR1gN5i6-qheh18M33Ux-6OaarRjxyuhW8RWKOHT_RyVAE5l8uuEcnRr=w1301-h640');
+	color:black;
+	font-size:12px; width:100%; text-align: center;position:relative;
+	top:20px;
+		height:200px;
+	width:200px;
+	border-color: green;
+	text-align: center;
+vertical-align: middle;
+line-height: 100px;  
+ 
+}
+#msgg
+{
+	display:none;
+}
+
+</style>
+</head>
+<body>
+
+<p id="n" style="position:absolute;left:50px;height:100px;width:100px;border-radius:100px;background-color:green;border-color: green;
+	text-align: center;padding-top: 20px;
+
+line-height: 20px;  
+ ">Number of people online:<span id="N" style="white-space:nowrap"></div><span id="users"></span></p>
+<ul id="users"></ul>
+	<ul id="messages" style="position:absolute;left:240px;top:20px">
+		</ul>
+		<p><h3 id="heading">Nice to meet you! Type in your name</h3></br><input id="name" value="xyz" visibility="hidden"/><button id="namez">Submit</button></br></br></p>
+
+
+		<form action="" id="msgg" style="position:absolute;left:800px;">
+		<p><h4>Happy chatting :)</h4><p>
+			<textarea id="m" ></textarea>
+			<button>Send</button>
+		</form>
+</body>
+		
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script>
+
+		$(function(){
+			var socket=io();
+			var num=0;
+			$('#msgg').submit(function(e){
+				e.preventDefault();
+				
+				socket.emit('chat',$("#m").val());
+				$("#m").val('');
+				return false;
+
+			});
+
+			$('#namez').click(function(e){
+				e.preventDefault();
+				socket.emit('new user',$("#name").val(),function(){
+					
+					   $("#namez").hide();
+					   $("#name").hide();
+				       $("#msgg").show();
+				       $("#heading").hide();
+				    
+			
+
+				});
+				$("#name").val('');
+				return false;
+				
+
+			});
+
+			
+			socket.on('chat',function chat(data){
+				num++;
+				id=num;
+				var userdat="<strong>"+data.user +":</strong>";
+				var li="<li id="+num+" class=messages>"+"</li>";
+				
+			
+				$("#messages").append($(li));
+
+					document.getElementById(num).innerHTML+=" "+userdat+" "+data.msg;
+			
+                 
+				
+
+				return num;
+				
+				
+
+				
+				
+
+			 });
+			
+			
+			
+			socket.on('numberonline',function(data){
+
+				document.getElementById("N").innerHTML=data;});
+
+1111			
+           socket.on('name',function(data){
+           	data1=data;
+           	 
+				
+				
+				return data1;
+
+				 
+
+		});
+           socket.on('get users',function(data)
+           {
+           	var html='';
+           	for(var i=0;i<data.length;i++)
+           	{
+           		html+="<li>"+data[i]+"</li>";
+           	}
+
+           	$("#users").html(html);
+
+           }
+            
+            );
+          
+		})
+		</script>
+
+</body>
+</html>
