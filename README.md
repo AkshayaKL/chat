@@ -45,3 +45,36 @@ node sampe.js
 in the terminal
 
 ### The code  would be up and running!
+
+# Step by Step description with images
+
+#### Initialising Node
+
+![alt text](https://raw.githubusercontent.com/AkshayaKL/chat/master/startingnode.png)
+
+#### User A opens our chat webapp
+
+
+![alt text](https://github.com/AkshayaKL/chat/blob/master/userAlogsin.png?raw=true)
+
+#### User A gets to type in a message
+
+
+![alt-text](https://github.com/AkshayaKL/chat/blob/master/userasmessageform.png)
+
+#### User B logs in
+
+
+![alt-text](https://github.com/AkshayaKL/chat/blob/master/userblogsin.png)
+
+#### User B gets to type in a message
+
+![alt-text](https://github.com/AkshayaKL/chat/blob/master/userbsmessageform.png)
+
+#### They send messages to each other.Multiple users can connect 
+
+![alt-text](https://github.com/AkshayaKL/chat/blob/master/messages1.png)
+
+![alt-text](https://github.com/AkshayaKL/chat/blob/master/messages2.png)
+
+
